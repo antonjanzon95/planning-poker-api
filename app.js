@@ -368,6 +368,10 @@ io.on('connection', (socket) => {
     const users = room.users;
     const admin = room?.admin;
 
+    if (room.currentTopic.votes > 0) {
+      room.previousTopics.push(room.currentTopic);
+    }
+
     saveSessionToDatabase(room);
 
     ROOMS.splice(roomIndex, 1);
